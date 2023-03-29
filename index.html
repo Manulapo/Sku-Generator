@@ -1,87 +1,66 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Sku list Generator</title>
-</head>
+  </head>
 
-<body>
-        <section class="first">
-            <div class="container1">
-                <h1>Ordered Sku list link Generator</h1>
-                <p>Paste below your unordered list of skus and let the magic begins...</p>
-                <form class="place">
-                    <input type="text" placeholder="Insert your Skus here..." id="input">
-                    <input type="submit" value="Organize" class="btn" id="start">
-                </form>
-            </div>
-        </section>
-        <section class="second">
-            <div class="container2">
-                <div class="output">
-                    <div id="link">https://www.gamestop.it/SearchResult/QuickSearch?listSkus=</div>
-                    <div class="result" id="result"></div>
-                </div>
-                <div class="btn-container">
-                    <button class="btn btn-secondary" id="copy"><i class="fas fa-copy fa-2x"></i></button>
-                    <button class="btn btn-secondary" id="reload"><i class="fas fa-redo-alt fa-2x"></i></button>
-                </div>
-            </div>
-        </section>
+  <body>
+    <section class="first">
+      <div class="container1">
+        <h1>Ordered Sku list link Generator</h1>
+        <p>
+          Paste below your unordered list of skus and let the magic begins...
+        </p>
+        <form class="place">
+          <input
+            type="text"
+            placeholder="Insert your Skus here..."
+            id="input"
+          />
+          <!-- <input type="submit" value="Organize" class="btn" id="start"> -->
+          <select name="" id="select">
+            <option value="select">Select Format</option>
+            <option value="skulist">SKU List</option>
+            <option value="carousel">Carousel</option>
+            <option value="custom">Custom</option>
+          </select>
+        </form>
+      </div>
+    </section>
+    <section class="second">
+      <div class="container2">
+        <div class="output">
+          <div id="link">Select a Format</div>
+          <div class="result" id="result"></div>
+        </div>
+        <div class="btn-container">
+          <button class="btn btn-secondary" id="copy">
+            <i class="fas fa-copy fa-2x"></i>
+          </button>
+          <button class="btn btn-secondary" id="reload">
+            <i class="fas fa-redo-alt fa-2x"></i>
+          </button>
+        </div>
+      </div>
+    </section>
 
-        <p id="alert" class="alert">Link copied in your clipboard</p>
-   
-        <section class="footer">
-            <p>Copyrigth &copy; Manuel La Porta 2021 - V1.0</p>
-        </section>
-    
-<script>
-    
-    let input = document.getElementById('input');
-    let output = document.getElementById('result');
-    const startBtn = document.getElementById('start');
-    const copyBtn = document.getElementById('copy');
-    const reloadBtn = document.getElementById('reload');
-    const alertBox = document.getElementById('alert');
+    <p id="alert" class="alert">Link copied in your clipboard</p>
 
-    
-    startBtn.addEventListener('click', skuListGen);
-    copyBtn.addEventListener('click', copyAll);
-    reloadBtn.addEventListener('click', reLoad);
-    
-    function skuListGen(e){
-        let listSku = input.value.split(' ');
-        let result = listSku.toString();
-        output.textContent = result;
-        e.preventDefault();
-    }
-    
-    function copyAll() {
-        let first = document.getElementById('link').textContent;
-        let second = document.getElementById('result').textContent;
-        let full = first + second;
-        navigator.clipboard.writeText(full);
-        showAlert();
-        setTimeout(showAlert,1500);
-    }
+    <section class="footer">
+      <p>Copyrigth &copy; Manuel La Porta 2023 - V1.1</p>
+    </section>
 
-    function reLoad() {
-        output.textContent ='';
-        input.value='';
-    }
-
-    function showAlert(){
-      alertBox.classList.toggle("active");
-    }
-
-
-</script>
-</body>
-
+    <script src="app.js"></script>
+  </body>
 </html>
