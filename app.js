@@ -7,30 +7,21 @@ const alertBox = document.getElementById('alert');
 const select = document.getElementById('select');
 const link = document.getElementById('link');
 
-select.addEventListener('change',(e) =>{
-    const inputObj = getOptionValue();
-    const option = inputObj.option;
-    const entries = inputObj.entries;
-    // console.log(option,entries)
-    
-    setOutput(option,entries)
-    // link.textContent = 'e'
-    e.preventDefault()
-})
+select.addEventListener('change', () => {
+    const { option, entries } = getOptionValue();
+    setOutput(option, entries);
+});
 
 reLoad();
-copyBtn.addEventListener('click', copyAll )
-reloadBtn.addEventListener('click', reLoad )
 
-function getOptionValue(){
-    let option = select.value;
-    let entries = input.value.trim().split(' ');
+copyBtn.addEventListener('click', copyAll);
+reloadBtn.addEventListener('click', reLoad);
 
-    select.addEventListener('change', () => {
-        option = select.value;
-    })
-
-    return {option, entries}
+function getOptionValue() {
+  return {
+    option: select.value,
+    entries: input.value.trim().split(' '),
+  };
 }
 
 function setOutput(option,entries){
@@ -51,7 +42,7 @@ function setOutput(option,entries){
         let cInput = `
         <form class="customForm">
             <div class="custom">
-                <input type="text" placeholder="First section" id="fValue"> SKU <input type="text" placeholder="Second section" id="sValue">
+                <input type="text" placeholder="First section" id="fValue"> + SKU + <input type="text" placeholder="Second section" id="sValue">
             </div>  
             <input type="submit" value="Confirm" class="btn" id="customInputBtn">
         </form>`
