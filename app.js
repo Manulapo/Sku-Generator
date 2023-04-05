@@ -7,29 +7,41 @@ const alertBox = document.getElementById('alert');
 const select = document.getElementById('select');
 const link = document.getElementById('link');
 
-select.addEventListener('change', () => {
-    const { option, entries } = getOptionValue();
-    setOutput(option, entries);
-});
+select.addEventListener('change',(e) =>{
+    const inputObj = getOptionValue();
+    const option = inputObj.option;
+    const entries = inputObj.entries;
+    // console.log(option,entries)
+    
+    setOutput(option,entries)
+    // link.textContent = 'e'
+    e.preventDefault()
+})
 
 reLoad();
+copyBtn.addEventListener('click', copyAll )
+reloadBtn.addEventListener('click', reLoad )
 
-copyBtn.addEventListener('click', copyAll);
-reloadBtn.addEventListener('click', reLoad);
+function getOptionValue(){
+    let option = select.value;
+    let entries = input.value.trim().split(' ');
 
-function getOptionValue() {
-  return {
-    option: select.value,
-    entries: input.value.trim().split(' '),
-  };
+    select.addEventListener('change', () => {
+        option = select.value;
+    })
+
+    return {option, entries}
 }
 
 function setOutput(option,entries){
     if (option === 'skulist'){
+
         const result = `https://www.gamestop.it/SearchResult/QuickSearch?listSkus=${entries.toString()}`      
         //check before retunring value
         link.textContent = result;
-    }else if(option === 'carousel'){
+
+    }else if(option === 'carousel-c'){
+
         let cardArray = [];
         entries.forEach(el =>{
             cardArray += '<div class="card" data-sku="'+ el +'"></div>';
@@ -38,11 +50,22 @@ function setOutput(option,entries){
         cardArray = cardArray.replaceAll('</div><div class="card" data-sku="">','');
         link.textContent = cardArray.toLocaleString()
 
+    }else if(option === 'carousel-s'){
+
+        let cardArray = [];
+        entries.forEach(el =>{
+            cardArray += '<div class="splide__slide" data-sku="'+ el +'"></div>';
+        })
+        //check before retunring value
+        cardArray = cardArray.replaceAll('</div><div class="card" data-sku="">','');
+        link.textContent = cardArray.toLocaleString()
+
     }else if(option === 'custom'){
+
         let cInput = `
         <form class="customForm">
             <div class="custom">
-                <input type="text" placeholder="First section" id="fValue"> + SKU + <input type="text" placeholder="Second section" id="sValue">
+                <input type="text" placeholder="First section" id="fValue"> SKU <input type="text" placeholder="Second section" id="sValue">
             </div>  
             <input type="submit" value="Confirm" class="btn" id="customInputBtn">
         </form>`
